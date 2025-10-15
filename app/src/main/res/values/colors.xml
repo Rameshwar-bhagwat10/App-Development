@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    
+    <!-- Agro Krishi Seva Theme Colors -->
+    <color name="primary_green">#4CAF50</color>
+    <color name="secondary_green">#8BC34A</color>
+    <color name="light_green">#A5D6A7</color>
+    <color name="very_light_green">#E8F5E8</color>
+    
+    <!-- Background Colors -->
+    <color name="background_white">#FFFFFF</color>
+    <color name="background_light_gray">#F8F9FA</color>
+    
+    <!-- Text Colors -->
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+    <color name="text_hint">#BDBDBD</color>
+    
+    <!-- Status Colors -->
+    <color name="error_red">#F44336</color>
+    <color name="success_green">#4CAF50</color>
+    
+    <!-- Input Field Colors -->
+    <color name="input_border">#E0E0E0</color>
+    <color name="input_border_focused">#4CAF50</color>
+    <color name="input_background">#FAFAFA</color>
+</resources>

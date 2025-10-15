@@ -1,0 +1,111 @@
+<resources>
+    <string name="app_name">Agro Krishi Seva</string>
+    
+    <!-- Login Screen -->
+    <string name="welcome_back">Welcome Back!</string>
+    <string name="login_subtitle">Login to continue your Agro journey 🌱</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="dont_have_account">Don\'t have an account? Register</string>
+    <string name="forgot_password">Forgot Password?</string>
+    
+    <!-- Register Screen -->
+    <string name="create_account">Create Account</string>
+    <string name="register_subtitle">Join Agro Krishi Seva to get expert tips &amp; products.</string>
+    <string name="full_name">Full Name</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="register">Register</string>
+    <string name="already_have_account">Already have an account? Login</string>
+    
+    <!-- Common -->
+    <string name="loading">Loading...</string>
+    <string name="please_wait">Please wait...</string>
+    
+    <!-- Error Messages -->
+    <string name="error_network">Network error. Please check your connection.</string>
+    <string name="error_login_failed">Login failed. Please try again.</string>
+    <string name="error_registration_failed">Registration failed. Please try again.</string>
+    <string name="error_email_already_exists">Email already exists. Please use a different email.</string>
+    <string name="error_weak_password">Password is too weak. Please use at least 6 characters.</string>
+    <string name="error_invalid_email">Please enter a valid email address.</string>
+    
+    <!-- Success Messages -->
+    <string name="registration_successful">Registration successful! Welcome to Agro Krishi Seva!</string>
+    <string name="login_successful">Login successful! Welcome back!</string>
+    
+    <!-- Home Screen -->
+    <string name="app_title">Agro Krishi Seva 🌿</string>
+    <string name="hello_user">Hello, %1$s 👋</string>
+    <string name="welcome_back_home">Welcome back, Farmer!</string>
+    <string name="home_subtitle">Let\'s grow something amazing today 🌱</string>
+    <string name="loading_user_data">Loading...</string>
+    
+    <!-- Quick Actions -->
+    <string name="products">Products</string>
+    <string name="tips_guidance">Tips &amp; Guidance</string>
+    <string name="weather_updates">Weather Updates</string>
+    <string name="contact_support">Contact / Support</string>
+    
+    <!-- Bottom Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_products">Products</string>
+    <string name="nav_tips">Tips</string>
+    <string name="nav_profile">Profile</string>
+    
+    <!-- Daily Quote -->
+    <string name="daily_quote_title">Daily Motivation</string>
+    <string name="daily_quote_text">Farming is not just a profession, it\'s a way of life 🌾</string>
+    
+    <!-- New Features -->
+    <string name="crop_calendar">Crop Calendar</string>
+    <string name="market_prices">Market Prices</string>
+    <string name="soil_health">Soil Health</string>
+    <string name="pest_control">Pest Control</string>
+    <string name="irrigation_guide">Irrigation Guide</string>
+    <string name="fertilizer_calc">Fertilizer Calculator</string>
+    <string name="farming_news">Farming News</string>
+    <string name="expert_consultation">Expert Consultation</string>
+    
+    <!-- Statistics -->
+    <string name="farming_stats">Your Farming Stats</string>
+    <string name="crops_planted">Crops Planted</string>
+    <string name="harvest_season">Harvest Season</string>
+    <string name="total_yield">Total Yield</string>
+    <string name="profit_earned">Profit Earned</string>
+    
+    <!-- Weather Info -->
+    <string name="todays_weather">Today\'s Weather</string>
+    <string name="temperature">Temperature</string>
+    <string name="humidity">Humidity</string>
+    <string name="rainfall">Rainfall</string>
+    
+    <!-- Quick Tips -->
+    <string name="quick_tips_title">Quick Tips</string>
+    <string name="tip_1">Water your crops early morning for better absorption</string>
+    <string name="tip_2">Check soil moisture before watering</string>
+    <string name="tip_3">Rotate crops to maintain soil health</string>
+    
+    <!-- Recent Activity -->
+    <string name="recent_activity">Recent Activity</string>
+    <string name="no_recent_activity">No recent activity</string>
+    
+    <!-- Content Descriptions -->
+    <string name="logo_description">Agro Krishi Seva Logo</string>
+    <string name="show_password">Show password</string>
+    <string name="hide_password">Hide password</string>
+    <string name="profile_icon">Profile</string>
+    <string name="menu_icon">Menu</string>
+    <string name="products_icon">Products</string>
+    <string name="tips_icon">Tips</string>
+    <string name="weather_icon">Weather</string>
+    <string name="support_icon">Support</string>
+    <string name="calendar_icon">Calendar</string>
+    <string name="market_icon">Market</string>
+    <string name="soil_icon">Soil</string>
+    <string name="pest_icon">Pest</string>
+    <string name="irrigation_icon">Irrigation</string>
+    <string name="calculator_icon">Calculator</string>
+    <string name="news_icon">News</string>
+    <string name="expert_icon">Expert</string>
+</resources>

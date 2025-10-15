@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "977029281105",
+    "project_id": "agro-krishi-seva",
+    "storage_bucket": "agro-krishi-seva.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:977029281105:android:73819a4c0734f105134f70",
+        "android_client_info": {
+          "package_name": "com.example.agrokrishiseva"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8olMe_zxUg5asCKEc3_7SOnYy3zmZp3k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
