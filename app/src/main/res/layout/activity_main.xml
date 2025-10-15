@@ -19,25 +19,45 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="#169400"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:title="@string/app_title"
-            app:titleTextColor="@color/white">
+            android:layout_height="72dp"
+            android:background="@color/primary_green"
+            android:elevation="8dp"
+            app:layout_scrollFlags="scroll|enterAlways">
 
-            <!-- Profile Icon on the right -->
-            <ImageView
-                android:id="@+id/ivProfile"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_gravity="end"
-                android:layout_marginEnd="16dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:clickable="true"
-                android:contentDescription="@string/profile_icon"
-                android:focusable="true"
-                android:padding="4dp"
-                android:src="@drawable/ic_person" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp">
+
+                <!-- App Title -->
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-black"
+                    android:text="@string/app_title"
+                    android:textColor="@color/white"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.02" />
+
+                <!-- Profile Icon -->
+                <ImageView
+                    android:id="@+id/ivProfile"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:contentDescription="@string/profile_icon"
+                    android:focusable="true"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_person"
+                    android:tint="@color/white" />
+
+            </LinearLayout>
 
         </com.google.android.material.appbar.MaterialToolbar>
 
@@ -56,53 +76,212 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Greeting Card -->
+            <!-- Enhanced Greeting Card -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardGreeting"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
-                app:cardBackgroundColor="#49B34B"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp">
+                android:background="@drawable/bg_welcome_gradient"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="8dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/bg_welcome_gradient"
                     android:orientation="vertical"
-                    android:padding="20dp">
+                    android:padding="24dp">
 
-                    <TextView
-                        android:id="@+id/tvGreeting"
+                    <!-- Header Row -->
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-medium"
-                        android:text="@string/welcome_back_home"
-                        android:textColor="@color/white"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/tvSubtitle"
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvTimeGreeting"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif"
+                                android:text="@string/good_morning"
+                                android:textColor="@color/white"
+                                android:textSize="16sp"
+                                android:alpha="0.9" />
+
+                            <TextView
+                                android:id="@+id/tvGreeting"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:fontFamily="sans-serif-black"
+                                android:text="@string/welcome_back_home"
+                                android:textColor="@color/white"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <!-- Notification Bell -->
+                        <LinearLayout
+                            android:id="@+id/layoutNotifications"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="8dp">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:contentDescription="Notifications"
+                                android:src="@drawable/ic_notification" />
+
+                            <TextView
+                                android:id="@+id/tvNotificationCount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:text="3"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <!-- Weather & Status Row -->
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="@string/home_subtitle"
-                        android:textColor="@color/white"
-                        android:textSize="14sp" />
+                        android:layout_marginTop="16dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvWeatherToday"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-medium"
+                                android:text="Today: 28°C, Sunny"
+                                android:textColor="@color/white"
+                                android:textSize="14sp"
+                                android:alpha="0.9" />
+
+                            <TextView
+                                android:id="@+id/tvSubtitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="@string/home_subtitle"
+                                android:textColor="@color/white"
+                                android:textSize="14sp"
+                                android:alpha="0.8" />
+
+                        </LinearLayout>
+
+                        <!-- Farm Status Indicator -->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <View
+                                android:layout_width="12dp"
+                                android:layout_height="12dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginLeft="20dp"
+                                android:background="@drawable/bg_button_green"
+                                android:backgroundTint="#FF5722" />
+
+                            <TextView
+                                android:id="@+id/tvFarmStatus"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="1dp"
+                                android:layout_marginLeft="15dp"
+                                android:text="@string/crops_healthy"
+                                android:textColor="@color/white"
+                                android:textSize="10sp"
+                                android:alpha="0.8" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Weather Info Card -->
+            <!-- Search Bar -->
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardWeatherInfo"
+                android:id="@+id/cardSearchBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                app:cardCornerRadius="25dp"
+                app:cardElevation="6dp"
+                app:strokeColor="@color/input_border"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="4dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginStart="16dp"
+                        android:contentDescription="Search"
+                        android:src="@drawable/ic_search" />
+
+                    <EditText
+                        android:id="@+id/etSearch"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="sans-serif"
+                        android:hint="@string/search_hint"
+                        android:inputType="text"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:textColor="@color/text_primary"
+                        android:textColorHint="@color/text_hint"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Weather & Crop Insights Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardWeatherInsights"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
+                app:cardElevation="6dp"
                 app:strokeColor="@color/input_border"
                 app:strokeWidth="1dp">
 
@@ -112,88 +291,155 @@
                     android:orientation="vertical"
                     android:padding="20dp">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-medium"
-                        android:text="@string/todays_weather"
-                        android:textColor="@color/text_primary"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
+                    <!-- Header -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:contentDescription="Weather Insights"
+                            android:src="@drawable/ic_insights" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="@string/weather_crop_insights"
+                            android:textColor="@color/text_primary"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_card_green"
+                            android:paddingStart="8dp"
+                            android:paddingTop="4dp"
+                            android:paddingEnd="8dp"
+                            android:paddingBottom="4dp"
+                            android:text="Live"
+                            android:textColor="#787878"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <!-- Current Conditions -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
                         android:orientation="horizontal">
 
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:gravity="center"
                             android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="28°C"
-                                android:textColor="@color/primary_green"
-                                android:textSize="18sp"
+                                android:fontFamily="sans-serif-medium"
+                                android:text="@string/current_conditions"
+                                android:textColor="@color/text_primary"
+                                android:textSize="14sp"
                                 android:textStyle="bold" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="16dp"
+                                    android:layout_height="16dp"
+                                    android:contentDescription="Weather"
+                                    android:src="@drawable/ic_weather" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:text="28°C • Sunny • 65% Humidity"
+                                    android:textColor="@color/text_secondary"
+                                    android:textSize="12sp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <!-- Trend Indicator -->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:contentDescription="Trend"
+                                android:src="@drawable/ic_trending_up" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/temperature"
-                                android:textColor="@color/text_secondary"
-                                android:textSize="12sp" />
+                                android:layout_marginTop="2dp"
+                                android:text="Good"
+                                android:textColor="@color/primary_green"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
 
                         </LinearLayout>
+
+                    </LinearLayout>
+
+                    <!-- Farming Recommendation -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:background="@color/very_light_green"
+                        android:orientation="horizontal"
+                        android:padding="12dp"
+                        android:gravity="center_vertical">
+
+                        <View
+                            android:layout_width="4dp"
+                            android:layout_height="24dp"
+                            android:background="@color/primary_green"
+                            android:layout_marginEnd="12dp" />
 
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:gravity="center"
                             android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="65%"
-                                android:textColor="@color/primary_green"
-                                android:textSize="18sp"
+                                android:fontFamily="sans-serif-medium"
+                                android:text="@string/farming_recommendation"
+                                android:textColor="@color/text_primary"
+                                android:textSize="12sp"
                                 android:textStyle="bold" />
 
                             <TextView
+                                android:id="@+id/tvFarmingRecommendation"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/humidity"
-                                android:textColor="@color/text_secondary"
-                                android:textSize="12sp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="12mm"
-                                android:textColor="@color/primary_green"
-                                android:textSize="18sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/rainfall"
+                                android:layout_marginTop="2dp"
+                                android:text="@string/good_for_watering"
                                 android:textColor="@color/text_secondary"
                                 android:textSize="12sp" />
 

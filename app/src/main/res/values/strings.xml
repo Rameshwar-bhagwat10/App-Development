@@ -86,9 +86,36 @@
     <string name="tip_2">Check soil moisture before watering</string>
     <string name="tip_3">Rotate crops to maintain soil health</string>
     
-    <!-- Recent Activity -->
-    <string name="recent_activity">Recent Activity</string>
-    <string name="no_recent_activity">No recent activity</string>
+    <!-- Search -->
+    <string name="search_hint">Search products, tips, crops...</string>
+    <string name="search_products">Search Products</string>
+    <string name="search_tips">Search Tips</string>
+    <string name="search_crops">Search Crops</string>
+    
+    <!-- Weather & Crop Insights -->
+    <string name="weather_crop_insights">Weather &amp; Crop Insights</string>
+    <string name="current_conditions">Current Conditions</string>
+    <string name="farming_recommendation">Farming Recommendation</string>
+    <string name="good_for_watering">Good conditions for watering crops</string>
+    <string name="avoid_spraying">Avoid pesticide spraying today</string>
+    <string name="perfect_planting">Perfect weather for planting</string>
+    <string name="harvest_ready">Ideal conditions for harvesting</string>
+    
+    <!-- Welcome Card Enhancements -->
+    <string name="good_morning">Good Morning</string>
+    <string name="good_afternoon">Good Afternoon</string>
+    <string name="good_evening">Good Evening</string>
+    <string name="weather_today">Today: %1$s°C, %2$s</string>
+    <string name="sunny">Sunny</string>
+    <string name="cloudy">Cloudy</string>
+    <string name="rainy">Rainy</string>
+    <string name="notifications_count">%1$d new notifications</string>
+    
+    <!-- Farm Status -->
+    <string name="farm_status">Farm Status</string>
+    <string name="crops_healthy">All crops are healthy</string>
+    <string name="irrigation_needed">Irrigation needed</string>
+    <string name="pest_alert">Pest alert detected</string>
     
     <!-- Content Descriptions -->
     <string name="logo_description">Agro Krishi Seva Logo</string>

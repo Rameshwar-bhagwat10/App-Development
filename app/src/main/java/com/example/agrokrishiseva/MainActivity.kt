@@ -2,6 +2,9 @@ package com.example.agrokrishiseva
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -24,7 +27,13 @@ class MainActivity : AppCompatActivity() {
     // UI Components
     private lateinit var toolbar: Toolbar
     private lateinit var ivProfile: ImageView
+    private lateinit var etSearch: EditText
+    private lateinit var tvTimeGreeting: TextView
     private lateinit var tvGreeting: TextView
+    private lateinit var tvNotificationCount: TextView
+    private lateinit var tvWeatherToday: TextView
+    private lateinit var tvFarmStatus: TextView
+    private lateinit var tvFarmingRecommendation: TextView
     private lateinit var tvQuickTip: TextView
     private lateinit var cardProducts: MaterialCardView
     private lateinit var cardTips: MaterialCardView
@@ -46,6 +55,16 @@ class MainActivity : AppCompatActivity() {
         "Keep your farming tools clean and sharp"
     )
     
+    // Farming recommendations array
+    private val farmingRecommendations = arrayOf(
+        "Good conditions for watering crops",
+        "Perfect weather for planting seeds",
+        "Ideal time for harvesting",
+        "Avoid pesticide spraying today",
+        "Great day for soil preparation",
+        "Monitor crops for pest activity"
+    )
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
@@ -65,16 +84,25 @@ class MainActivity : AppCompatActivity() {
         
         initViews()
         setupToolbar()
+        setupSearchBar()
         setupClickListeners()
         setupBottomNavigation()
         loadUserData()
+        setupEnhancedWelcomeCard()
         showRandomTip()
+        showRandomRecommendation()
     }
     
     private fun initViews() {
         toolbar = findViewById(R.id.toolbar)
         ivProfile = findViewById(R.id.ivProfile)
+        etSearch = findViewById(R.id.etSearch)
+        tvTimeGreeting = findViewById(R.id.tvTimeGreeting)
         tvGreeting = findViewById(R.id.tvGreeting)
+        tvNotificationCount = findViewById(R.id.tvNotificationCount)
+        tvWeatherToday = findViewById(R.id.tvWeatherToday)
+        tvFarmStatus = findViewById(R.id.tvFarmStatus)
+        tvFarmingRecommendation = findViewById(R.id.tvFarmingRecommendation)
         tvQuickTip = findViewById(R.id.tvQuickTip)
         cardProducts = findViewById(R.id.cardProducts)
         cardTips = findViewById(R.id.cardTips)
@@ -89,15 +117,52 @@ class MainActivity : AppCompatActivity() {
     
     private fun setupToolbar() {
         setSupportActionBar(toolbar)
-        supportActionBar?.apply {
-            setDisplayShowTitleEnabled(true)
-            title = getString(R.string.app_title)
-        }
+        supportActionBar?.setDisplayShowTitleEnabled(false)
         
         // Handle profile icon click
         ivProfile.setOnClickListener {
             startActivity(Intent(this, ProfileActivity::class.java))
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+        }
+    }
+    
+    private fun setupSearchBar() {
+        etSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val query = s.toString().trim()
+                if (query.isNotEmpty()) {
+                    performSearch(query)
+                }
+            }
+            
+            override fun afterTextChanged(s: Editable?) {}
+        })
+    }
+    
+    private fun performSearch(query: String) {
+        when {
+            query.contains("product", ignoreCase = true) || 
+            query.contains("buy", ignoreCase = true) ||
+            query.contains("shop", ignoreCase = true) -> {
+                Toast.makeText(this, "Searching products for: $query", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, ProductsActivity::class.java))
+            }
+            query.contains("tip", ignoreCase = true) || 
+            query.contains("advice", ignoreCase = true) ||
+            query.contains("guide", ignoreCase = true) -> {
+                Toast.makeText(this, "Searching tips for: $query", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, TipsActivity::class.java))
+            }
+            query.contains("weather", ignoreCase = true) ||
+            query.contains("rain", ignoreCase = true) ||
+            query.contains("temperature", ignoreCase = true) -> {
+                Toast.makeText(this, "Weather information for: $query", Toast.LENGTH_SHORT).show()
+            }
+            else -> {
+                Toast.makeText(this, "Searching for: $query", Toast.LENGTH_SHORT).show()
+            }
         }
     }
     
@@ -205,16 +270,43 @@ class MainActivity : AppCompatActivity() {
         }
     }
     
+    private fun setupEnhancedWelcomeCard() {
+        // Set time-based greeting
+        val currentHour = java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY)
+        val timeGreeting = when (currentHour) {
+            in 5..11 -> getString(R.string.good_morning)
+            in 12..16 -> getString(R.string.good_afternoon)
+            else -> getString(R.string.good_evening)
+        }
+        tvTimeGreeting.text = timeGreeting
+        
+        // Set notification count
+        tvNotificationCount.text = "3"
+        
+        // Set weather info
+        tvWeatherToday.text = "Today: 28°C, Sunny"
+        
+        // Set farm status
+        tvFarmStatus.text = getString(R.string.crops_healthy)
+    }
+    
     private fun showRandomTip() {
         val randomTip = quickTips.random()
         tvQuickTip.text = randomTip
+    }
+    
+    private fun showRandomRecommendation() {
+        val randomRecommendation = farmingRecommendations.random()
+        tvFarmingRecommendation.text = randomRecommendation
     }
     
     override fun onResume() {
         super.onResume()
         // Ensure home is selected when returning to this activity
         bottomNavigation.selectedItemId = R.id.nav_home
-        // Show a new random tip when returning to home
+        // Show new random content when returning to home
         showRandomTip()
+        showRandomRecommendation()
+        setupEnhancedWelcomeCard()
     }
 }
