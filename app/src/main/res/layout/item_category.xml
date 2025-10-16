@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="100dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="6dp"
+    android:background="@drawable/bg_rounded_corner"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Category Icon -->
+    <ImageView
+        android:id="@+id/ivCategoryIcon"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:contentDescription="Category Icon"
+        android:src="@drawable/ic_eco"
+        android:tint="@color/primary_green" />
+
+    <!-- Category Name -->
+    <TextView
+        android:id="@+id/tvCategoryName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:text="Seeds"
+        android:textColor="@color/text_primary"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <!-- Product Count -->
+    <TextView
+        android:id="@+id/tvProductCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="25 items"
+        android:textColor="@color/text_hint"
+        android:textSize="10sp" />
+
+</LinearLayout>

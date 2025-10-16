@@ -1,0 +1,626 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_white"
+    tools:context=".activities.ProductDetailActivity">
+
+    <!-- App Bar -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:elevation="0dp">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@color/white"
+            app:layout_scrollFlags="scroll|enterAlways">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="8dp"
+                android:paddingEnd="16dp">
+
+                <!-- Back Button -->
+                <ImageView
+                    android:id="@+id/ivBack"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:contentDescription="Back"
+                    android:focusable="true"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_arrow_back"
+                    android:tint="@color/text_primary" />
+
+                <!-- Spacer -->
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
+                <!-- Share Button -->
+                <ImageView
+                    android:id="@+id/ivShare"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:contentDescription="Share"
+                    android:focusable="true"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_share"
+                    android:tint="@color/text_primary" />
+
+                <!-- Favorite Button -->
+                <ImageView
+                    android:id="@+id/ivFavorite"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:contentDescription="Add to Favorites"
+                    android:focusable="true"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_favorite_border"
+                    android:tint="@color/text_primary" />
+
+            </LinearLayout>
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Main Content -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Product Image Section -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:background="@color/background_light_gray">
+
+                <!-- Product Image ViewPager -->
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/vpProductImages"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <!-- Discount Badge -->
+                <TextView
+                    android:id="@+id/tvDiscountBadge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|end"
+                    android:layout_margin="16dp"
+                    android:background="@color/error_red"
+                    android:paddingStart="12dp"
+                    android:paddingTop="6dp"
+                    android:paddingEnd="12dp"
+                    android:paddingBottom="6dp"
+                    android:text="20% OFF"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
+                <!-- Image Indicators -->
+                <LinearLayout
+                    android:id="@+id/layoutImageIndicators"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_marginBottom="16dp"
+                    android:orientation="horizontal" />
+
+            </FrameLayout>
+
+            <!-- Product Details Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <!-- Product Category and Stock -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvProductCategory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/very_light_green"
+                        android:paddingStart="10dp"
+                        android:paddingTop="4dp"
+                        android:paddingEnd="10dp"
+                        android:paddingBottom="4dp"
+                        android:text="Seeds"
+                        android:textColor="@color/primary_green"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/tvStockStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="✓ In Stock"
+                        android:textColor="@color/success_green"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <!-- Product Name -->
+                <TextView
+                    android:id="@+id/tvProductName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Premium Wheat Seeds - High Yield Variety"
+                    android:textColor="@color/text_primary"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <!-- Rating and Reviews -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <!-- Rating Stars -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:contentDescription="Star"
+                            android:src="@drawable/ic_star"
+                            android:tint="@color/secondary_green" />
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_marginStart="2dp"
+                            android:contentDescription="Star"
+                            android:src="@drawable/ic_star"
+                            android:tint="@color/secondary_green" />
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_marginStart="2dp"
+                            android:contentDescription="Star"
+                            android:src="@drawable/ic_star"
+                            android:tint="@color/secondary_green" />
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_marginStart="2dp"
+                            android:contentDescription="Star"
+                            android:src="@drawable/ic_star"
+                            android:tint="@color/secondary_green" />
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_marginStart="2dp"
+                            android:contentDescription="Star"
+                            android:src="@drawable/ic_star_border"
+                            android:tint="@color/text_hint" />
+
+                    </LinearLayout>
+
+                    <!-- Rating Text -->
+                    <TextView
+                        android:id="@+id/tvRating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="4.2"
+                        android:textColor="@color/text_primary"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <!-- Reviews Count -->
+                    <TextView
+                        android:id="@+id/tvReviewsCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text="(128 reviews)"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <!-- Price Section -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <!-- Current Price -->
+                    <TextView
+                        android:id="@+id/tvCurrentPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="₹299"
+                        android:textColor="@color/primary_green"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <!-- Original Price (Strikethrough) -->
+                    <TextView
+                        android:id="@+id/tvOriginalPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:text="₹399"
+                        android:textColor="@color/text_hint"
+                        android:textSize="16sp"
+                        android:visibility="gone" />
+
+                    <!-- Per Unit -->
+                    <TextView
+                        android:id="@+id/tvPriceUnit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:text="/kg"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="16sp" />
+
+                    <!-- Savings -->
+                    <TextView
+                        android:id="@+id/tvSavings"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:background="@color/very_light_green"
+                        android:paddingStart="8dp"
+                        android:paddingTop="4dp"
+                        android:paddingEnd="8dp"
+                        android:paddingBottom="4dp"
+                        android:text="Save ₹100"
+                        android:textColor="@color/primary_green"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+                <!-- Product Description -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Description"
+                    android:textColor="@color/text_primary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvProductDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:lineSpacingExtra="4dp"
+                    android:text="High-quality wheat seeds with excellent germination rate. Suitable for all soil types and weather conditions. These premium seeds ensure maximum yield and disease resistance."
+                    android:textColor="@color/text_secondary"
+                    android:textSize="14sp" />
+
+                <!-- Key Features -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Key Features"
+                    android:textColor="@color/text_primary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="vertical">
+
+                    <!-- Feature 1 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:layout_width="6dp"
+                            android:layout_height="6dp"
+                            android:background="@drawable/bg_card_green"
+                            android:backgroundTint="@color/primary_green" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:text="High germination rate (95%+)"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                    <!-- Feature 2 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:layout_width="6dp"
+                            android:layout_height="6dp"
+                            android:background="@drawable/bg_card_green"
+                            android:backgroundTint="@color/primary_green" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:text="Disease resistant variety"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                    <!-- Feature 3 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:layout_width="6dp"
+                            android:layout_height="6dp"
+                            android:background="@drawable/bg_card_green"
+                            android:backgroundTint="@color/primary_green" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:text="Suitable for all seasons"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                    <!-- Feature 4 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:layout_width="6dp"
+                            android:layout_height="6dp"
+                            android:background="@drawable/bg_card_green"
+                            android:backgroundTint="@color/primary_green" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:text="Maximum yield potential"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- Quantity Selector -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Quantity"
+                    android:textColor="@color/text_primary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <!-- Quantity Controls -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_card_green"
+                        android:backgroundTint="@color/input_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="4dp">
+
+                        <!-- Decrease Button -->
+                        <ImageView
+                            android:id="@+id/ivDecreaseQuantity"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:clickable="true"
+                            android:contentDescription="Decrease Quantity"
+                            android:focusable="true"
+                            android:padding="6dp"
+                            android:src="@drawable/ic_remove"
+                            android:tint="@color/text_primary" />
+
+                        <!-- Quantity Display -->
+                        <TextView
+                            android:id="@+id/tvQuantity"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="1"
+                            android:textColor="@color/text_primary"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <!-- Increase Button -->
+                        <ImageView
+                            android:id="@+id/ivIncreaseQuantity"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:clickable="true"
+                            android:contentDescription="Increase Quantity"
+                            android:focusable="true"
+                            android:padding="6dp"
+                            android:src="@drawable/ic_add"
+                            android:tint="@color/text_primary" />
+
+                    </LinearLayout>
+
+                    <!-- Total Price -->
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total: "
+                        android:textColor="@color/text_secondary"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tvTotalPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="₹299"
+                        android:textColor="@color/primary_green"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <!-- Spacer for bottom buttons -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Bottom Action Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/white"
+        android:elevation="8dp"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <!-- Add to Cart Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAddToCart"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:text="Add to Cart"
+            android:textColor="@color/primary_green"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:cornerRadius="24dp"
+            app:icon="@drawable/ic_shopping_cart"
+            app:iconGravity="textStart"
+            app:iconPadding="8dp"
+            app:iconSize="18dp"
+            app:iconTint="@color/primary_green"
+            app:strokeColor="@color/primary_green"
+            app:strokeWidth="2dp" />
+
+        <!-- Buy Now Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnBuyNow"
+            style="@style/Widget.Material3.Button"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/primary_green"
+            android:text="Buy Now"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:cornerRadius="24dp"
+            app:icon="@drawable/ic_flash"
+            app:iconGravity="textStart"
+            app:iconPadding="8dp"
+            app:iconSize="18dp"
+            app:iconTint="@color/white" />
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
