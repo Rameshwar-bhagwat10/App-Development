@@ -8,16 +8,20 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.agrokrishiseva.MainActivity
 import com.example.agrokrishiseva.R
 import com.example.agrokrishiseva.utils.ValidationUtils
+import com.example.agrokrishiseva.data.UserRepository
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
     
     private lateinit var auth: FirebaseAuth
+    private val userRepository = UserRepository()
     
     // UI Components
     private lateinit var tilEmail: TextInputLayout
@@ -105,7 +109,11 @@ class LoginActivity : AppCompatActivity() {
                 setLoadingState(false)
                 
                 if (task.isSuccessful) {
-                    // Login successful
+                    // Login successful - update last login date
+                    lifecycleScope.launch {
+                        userRepository.updateLastLoginDate()
+                    }
+                    
                     Toast.makeText(
                         this,
                         getString(R.string.login_successful),

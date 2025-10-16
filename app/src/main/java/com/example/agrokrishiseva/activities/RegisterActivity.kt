@@ -8,7 +8,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.agrokrishiseva.MainActivity
 import com.example.agrokrishiseva.R
 import com.example.agrokrishiseva.models.User
+import com.example.agrokrishiseva.data.UserRepository
 import com.example.agrokrishiseva.utils.ValidationUtils
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -21,6 +24,7 @@ class RegisterActivity : AppCompatActivity() {
     
     private lateinit var auth: FirebaseAuth
     private lateinit var firestore: FirebaseFirestore
+    private val userRepository = UserRepository()
     
     // UI Components
     private lateinit var tilFullName: TextInputLayout
@@ -157,31 +161,43 @@ class RegisterActivity : AppCompatActivity() {
     private fun saveUserToFirestore(uid: String, fullName: String, email: String) {
         val user = User(
             uid = uid,
-            name = fullName,
+            fullName = fullName,
             email = email,
-            createdAt = System.currentTimeMillis()
+            joinDate = System.currentTimeMillis(),
+            lastLoginDate = System.currentTimeMillis()
         )
         
-        firestore.collection("users")
-            .document(uid)
-            .set(user)
-            .addOnSuccessListener {
-                setLoadingState(false)
-                Toast.makeText(
-                    this,
-                    getString(R.string.registration_successful),
-                    Toast.LENGTH_SHORT
-                ).show()
-                navigateToMain()
+        lifecycleScope.launch {
+            try {
+                val success = userRepository.createUserProfile(user)
+                runOnUiThread {
+                    setLoadingState(false)
+                    if (success) {
+                        Toast.makeText(
+                            this@RegisterActivity,
+                            getString(R.string.registration_successful),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        navigateToMain()
+                    } else {
+                        Toast.makeText(
+                            this@RegisterActivity,
+                            "Failed to save user data",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
+            } catch (e: Exception) {
+                runOnUiThread {
+                    setLoadingState(false)
+                    Toast.makeText(
+                        this@RegisterActivity,
+                        "Error: ${e.message}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
             }
-            .addOnFailureListener { exception ->
-                setLoadingState(false)
-                Toast.makeText(
-                    this,
-                    "Failed to save user data: ${exception.message}",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
+        }
     }
     
     private fun setLoadingState(isLoading: Boolean) {
