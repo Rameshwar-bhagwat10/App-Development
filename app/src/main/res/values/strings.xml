@@ -117,6 +117,45 @@
     <string name="irrigation_needed">Irrigation needed</string>
     <string name="pest_alert">Pest alert detected</string>
     
+    <!-- Tips Section -->
+    <string name="tips_title">Tips &amp; Guidance</string>
+    <string name="expert_tips">Expert Tips</string>
+    <string name="categories">Categories</string>
+    <string name="all_tips">All Tips</string>
+    <string name="search_tips_hint">Search tips, crops, fertilizers...</string>
+    <string name="no_tips_found">No tips found</string>
+    <string name="try_different_keywords">Try searching with different keywords</string>
+    <string name="tips_count">%1$d tips</string>
+    <string name="views_count">%1$s views</string>
+    <string name="rating_text">%1$.1f rating</string>
+    <string name="bookmark_tip">Bookmark tip</string>
+    <string name="unbookmark_tip">Remove bookmark</string>
+    
+    <!-- Tip Detail -->
+    <string name="description">Description</string>
+    <string name="tags">Tags</string>
+    <string name="step_by_step_guide">Step-by-Step Guide</string>
+    <string name="benefits">Benefits</string>
+    <string name="requirements">Requirements</string>
+    <string name="difficulty">Difficulty</string>
+    <string name="duration">Duration</string>
+    <string name="season">Season</string>
+    
+    <!-- Difficulty Levels -->
+    <string name="beginner">Beginner</string>
+    <string name="intermediate">Intermediate</string>
+    <string name="advanced">Advanced</string>
+    
+    <!-- Categories -->
+    <string name="crops">Crops</string>
+    <string name="fertilizers">Fertilizers</string>
+    <string name="seeds">Seeds</string>
+    <string name="irrigation">Irrigation</string>
+<!--    <string name="pest_control">Pest Control</string>-->
+<!--    <string name="soil_health">Soil Health</string>-->
+    <string name="weather">Weather</string>
+    <string name="harvesting">Harvesting</string>
+    
     <!-- Content Descriptions -->
     <string name="logo_description">Agro Krishi Seva Logo</string>
     <string name="show_password">Show password</string>

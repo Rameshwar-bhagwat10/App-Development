@@ -67,6 +67,13 @@
             android:exported="false"
             android:theme="@style/Theme.AgroKrishiSeva"
             android:parentActivityName=".activities.ProductsActivity" />
+            
+        <!-- Tip Detail Activity -->
+        <activity
+            android:name=".activities.TipDetailActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AgroKrishiSeva"
+            android:parentActivityName=".activities.TipsActivity" />
     </application>
 
 </manifest>

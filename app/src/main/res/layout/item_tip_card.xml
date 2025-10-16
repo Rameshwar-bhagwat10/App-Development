@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp"
+    app:rippleColor="@color/primary_green"
+    app:strokeWidth="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- Tip Image -->
+        <ImageView
+            android:id="@+id/ivTipImage"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/bg_card_green"
+            android:padding="12dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_eco"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/primary_green" />
+
+        <!-- Category Badge -->
+        <TextView
+            android:id="@+id/tvCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_card_green"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="4dp"
+            android:text="Crops"
+            android:textColor="@color/primary_green"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Crops" />
+
+        <!-- Tip Title -->
+        <TextView
+            android:id="@+id/tvTipTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="sans-serif-medium"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:text="Rice Cultivation Best Practices"
+            android:textColor="@color/text_primary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/tvCategory"
+            app:layout_constraintStart_toEndOf="@id/ivTipImage"
+            app:layout_constraintTop_toTopOf="@id/ivTipImage"
+            tools:text="Rice Cultivation Best Practices" />
+
+        <!-- Difficulty Badge -->
+        <TextView
+            android:id="@+id/tvDifficulty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/bg_card_green"
+            android:paddingHorizontal="6dp"
+            android:paddingVertical="2dp"
+            android:text="Intermediate"
+            android:textColor="@color/primary_green"
+            android:textSize="9sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/ivTipImage"
+            app:layout_constraintTop_toBottomOf="@id/tvTipTitle"
+            tools:text="Intermediate" />
+
+        <!-- Time Badge -->
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:background="@drawable/bg_card_green"
+            android:paddingHorizontal="6dp"
+            android:paddingVertical="2dp"
+            android:text="3-4 months"
+            android:textColor="@color/primary_green"
+            android:textSize="9sp"
+            app:layout_constraintStart_toEndOf="@id/tvDifficulty"
+            app:layout_constraintTop_toTopOf="@id/tvDifficulty"
+            tools:text="3-4 months" />
+
+        <!-- Short Description -->
+        <TextView
+            android:id="@+id/tvShortDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:text="Learn the essential techniques for successful rice farming"
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivTipImage"
+            tools:text="Learn the essential techniques for successful rice farming" />
+
+        <!-- Bottom Section -->
+        <LinearLayout
+            android:id="@+id/llBottomSection"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvShortDescription">
+
+            <!-- Rating -->
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_favorite"
+                app:tint="@color/secondary_green" />
+
+            <TextView
+                android:id="@+id/tvRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="4.5"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp"
+                tools:text="4.5" />
+
+            <!-- Views -->
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginStart="12dp"
+                android:src="@drawable/ic_history"
+                app:tint="@color/text_hint" />
+
+            <TextView
+                android:id="@+id/tvViews"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="1.2k views"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp"
+                tools:text="1.2k views" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <!-- Bookmark -->
+            <ImageView
+                android:id="@+id/ivBookmark"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="4dp"
+                android:src="@drawable/ic_favorite"
+                app:tint="@color/text_hint" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
