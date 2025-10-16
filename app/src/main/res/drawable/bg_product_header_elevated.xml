@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Shadow Layer 1 (Outer) -->
+    <item android:top="4dp" android:left="4dp" android:right="4dp" android:bottom="10dp">
+        <shape android:shape="rectangle">
+            <corners android:radius="20dp" />
+            <solid android:color="#08000000" />
+        </shape>
+    </item>
+    <!-- Shadow Layer 2 (Middle) -->
+    <item android:top="3dp" android:left="3dp" android:right="3dp" android:bottom="8dp">
+        <shape android:shape="rectangle">
+            <corners android:radius="20dp" />
+            <solid android:color="#12000000" />
+        </shape>
+    </item>
+    <!-- Shadow Layer 3 (Inner) -->
+    <item android:top="2dp" android:left="2dp" android:right="2dp" android:bottom="6dp">
+        <shape android:shape="rectangle">
+            <corners android:radius="20dp" />
+            <solid android:color="#18000000" />
+        </shape>
+    </item>
+    <!-- Card Layer with Gradient -->
+    <item android:bottom="4dp">
+        <shape android:shape="rectangle">
+            <corners android:radius="20dp" />
+            <gradient
+                android:startColor="@color/primary_green"
+                android:endColor="@color/secondary_green"
+                android:angle="135"
+                android:type="linear" />
+        </shape>
+    </item>
+</layer-list>

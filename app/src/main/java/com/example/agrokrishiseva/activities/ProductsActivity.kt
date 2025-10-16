@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.agrokrishiseva.MainActivity
 import com.example.agrokrishiseva.R
 import com.example.agrokrishiseva.adapters.CategoryAdapter
 import com.example.agrokrishiseva.adapters.ProductAdapter
@@ -18,6 +19,7 @@ import com.example.agrokrishiseva.models.Category
 import com.example.agrokrishiseva.models.Product
 import android.widget.LinearLayout
 import android.widget.Toast
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class ProductsActivity : AppCompatActivity() {
     
@@ -30,6 +32,8 @@ class ProductsActivity : AppCompatActivity() {
     private lateinit var layoutCart: LinearLayout
     private lateinit var cardBulkDiscount: LinearLayout
     private lateinit var cardFreeDelivery: LinearLayout
+    private lateinit var cardHeader: LinearLayout
+    private lateinit var bottomNavigation: BottomNavigationView
     
     private lateinit var categoryAdapter: CategoryAdapter
     private lateinit var productAdapter: ProductAdapter
@@ -44,6 +48,7 @@ class ProductsActivity : AppCompatActivity() {
         setupRecyclerViews()
         setupClickListeners()
         setupSearchFunctionality()
+        setupBottomNavigation()
         loadSampleData()
     }
     
@@ -57,6 +62,8 @@ class ProductsActivity : AppCompatActivity() {
         layoutCart = findViewById(R.id.layoutCart)
         cardBulkDiscount = findViewById(R.id.cardBulkDiscount)
         cardFreeDelivery = findViewById(R.id.cardFreeDelivery)
+        cardHeader = findViewById(R.id.cardHeader)
+        bottomNavigation = findViewById(R.id.bottomNavigation)
     }
     
     private fun setupRecyclerViews() {
@@ -122,6 +129,11 @@ class ProductsActivity : AppCompatActivity() {
         cardFreeDelivery.setOnClickListener {
             // Handle free delivery click
         }
+        
+        cardHeader.setOnClickListener {
+            // Handle header click - could show product statistics or featured items
+            showProductStatistics()
+        }
     }
     
     private fun setupSearchFunctionality() {
@@ -139,11 +151,11 @@ class ProductsActivity : AppCompatActivity() {
     private fun loadSampleData() {
         // Load sample categories
         val categories = listOf(
-            Category("1", "Seeds", R.drawable.ic_eco, 25),
-            Category("2", "Fertilizers", R.drawable.ic_trending_up, 18),
-            Category("3", "Tools", R.drawable.ic_support, 12),
-            Category("4", "Pesticides", R.drawable.ic_eco, 8),
-            Category("5", "Equipment", R.drawable.ic_support, 15)
+            Category("1", "Seeds", R.drawable.ic_seeds, 25),
+            Category("2", "Fertilizers", R.drawable.ic_fertilizer, 18),
+            Category("3", "Tools", R.drawable.ic_tools, 12),
+            Category("4", "Pesticides", R.drawable.ic_pesticide, 8),
+            Category("5", "Equipment", R.drawable.ic_equipment, 15)
         )
         categoryAdapter.updateCategories(categories)
         
@@ -268,5 +280,43 @@ class ProductsActivity : AppCompatActivity() {
         // Navigate to cart activity
         // val intent = Intent(this, CartActivity::class.java)
         // startActivity(intent)
+    }
+    
+    private fun showProductStatistics() {
+        // Show product statistics or featured items
+        Toast.makeText(
+            this,
+            "50+ Premium Products Available!",
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+    
+    private fun setupBottomNavigation() {
+        bottomNavigation.selectedItemId = R.id.nav_products
+        
+        bottomNavigation.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finish()
+                    true
+                }
+                R.id.nav_products -> {
+                    // Already on products page
+                    true
+                }
+                R.id.nav_tips -> {
+                    startActivity(Intent(this, TipsActivity::class.java))
+                    finish()
+                    true
+                }
+                R.id.nav_profile -> {
+                    startActivity(Intent(this, ProfileActivity::class.java))
+                    finish()
+                    true
+                }
+                else -> false
+            }
+        }
     }
 }

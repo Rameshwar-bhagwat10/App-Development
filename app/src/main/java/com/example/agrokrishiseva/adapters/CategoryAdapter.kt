@@ -52,10 +52,12 @@ class CategoryAdapter(
             val isSelected = category.id == selectedCategoryId
             if (isSelected) {
                 itemView.setBackgroundColor(itemView.context.getColor(R.color.very_light_green))
-                ivCategoryIcon.setColorFilter(itemView.context.getColor(R.color.primary_green))
+                // Keep original icon colors for selected state
+                ivCategoryIcon.clearColorFilter()
             } else {
                 itemView.setBackgroundColor(itemView.context.getColor(R.color.white))
-                ivCategoryIcon.setColorFilter(itemView.context.getColor(R.color.text_secondary))
+                // Keep original icon colors for normal state
+                ivCategoryIcon.clearColorFilter()
             }
             
             itemView.setOnClickListener {
