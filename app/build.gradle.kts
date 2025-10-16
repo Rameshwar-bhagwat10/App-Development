@@ -48,7 +48,11 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
     implementation("com.google.firebase:firebase-auth:23.1.0")
     implementation("com.google.firebase:firebase-firestore:25.1.1")
+    implementation("com.google.firebase:firebase-storage:21.0.1")
     implementation("com.google.firebase:firebase-analytics")
+    
+    // Image loading
+    implementation("com.github.bumptech.glide:glide:4.16.0")
     
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

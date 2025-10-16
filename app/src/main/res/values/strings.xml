@@ -226,4 +226,24 @@
     <string name="logout">Logout</string>
     <string name="logout_confirmation">Are you sure you want to logout?</string>
     <string name="logged_out_successfully">Logged out successfully</string>
+    
+    <!-- Profile Image -->
+    <string name="profile_picture">Profile Picture</string>
+    <string name="choose_from_gallery">Choose from Gallery</string>
+    <string name="remove_profile_picture">Remove Profile Picture</string>
+    <string name="view_full_size">View Full Size</string>
+    <string name="change_picture">Change Picture</string>
+    <string name="remove_picture">Remove Picture</string>
+    <string name="uploading_image">Uploading image...</string>
+    <string name="profile_picture_updated">Profile picture updated!</string>
+    <string name="failed_to_upload_image">Failed to upload image</string>
+    <string name="invalid_image_file">Invalid image file</string>
+    <string name="failed_to_process_image">Failed to process image</string>
+    <string name="removing_profile_picture">Removing profile picture...</string>
+    <string name="profile_picture_removed">Profile picture removed</string>
+    <string name="failed_to_remove_profile_picture">Failed to remove profile picture</string>
+    <string name="remove_profile_picture_confirmation">Are you sure you want to remove your profile picture?</string>
+    <string name="storage_permission_required">Storage permission is required to select profile image</string>
+    <string name="unable_to_open_gallery">Unable to open gallery</string>
+    <string name="close">Close</string>
 </resources>

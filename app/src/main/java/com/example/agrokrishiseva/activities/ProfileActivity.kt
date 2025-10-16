@@ -1,19 +1,27 @@
 package com.example.agrokrishiseva.activities
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.agrokrishiseva.MainActivity
 import com.example.agrokrishiseva.R
 import com.example.agrokrishiseva.data.UserRepository
 import com.example.agrokrishiseva.models.User
 import com.example.agrokrishiseva.models.UserStats
+import com.example.agrokrishiseva.utils.ImageUtils
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
@@ -25,6 +33,7 @@ class ProfileActivity : AppCompatActivity() {
     
     private lateinit var bottomNavigation: BottomNavigationView
     private lateinit var ivProfileImage: ImageView
+    private lateinit var cvCameraIcon: MaterialCardView
     private lateinit var tvUserName: TextView
     private lateinit var tvUserEmail: TextView
     private lateinit var tvJoinDate: TextView
@@ -51,6 +60,24 @@ class ProfileActivity : AppCompatActivity() {
     private val userRepository = UserRepository()
     private var currentUser: User? = null
     
+    // Image selection launcher
+    private val imagePickerLauncher = registerForActivityResult(
+        ActivityResultContracts.GetContent()
+    ) { uri: Uri? ->
+        uri?.let { handleImageSelection(it) }
+    }
+    
+    // Permission launcher
+    private val permissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        if (isGranted) {
+            openImagePicker()
+        } else {
+            Toast.makeText(this, "Storage permission is required to select profile image", Toast.LENGTH_LONG).show()
+        }
+    }
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
@@ -69,6 +96,7 @@ class ProfileActivity : AppCompatActivity() {
     private fun initViews() {
         bottomNavigation = findViewById(R.id.bottomNavigation)
         ivProfileImage = findViewById(R.id.ivProfileImage)
+        cvCameraIcon = findViewById(R.id.cvCameraIcon)
         tvUserName = findViewById(R.id.tvUserName)
         tvUserEmail = findViewById(R.id.tvUserEmail)
         tvJoinDate = findViewById(R.id.tvJoinDate)
@@ -94,6 +122,18 @@ class ProfileActivity : AppCompatActivity() {
     }
     
     private fun setupClickListeners() {
+        cvCameraIcon.setOnClickListener {
+            showImageSelectionDialog()
+        }
+        
+        ivProfileImage.setOnClickListener {
+            if (!currentUser?.profileImageUrl.isNullOrEmpty()) {
+                showProfileImageDialog()
+            } else {
+                showImageSelectionDialog()
+            }
+        }
+        
         ivEditProfile.setOnClickListener {
             openEditProfile()
         }
@@ -149,6 +189,9 @@ class ProfileActivity : AppCompatActivity() {
             // Basic Info
             tvUserName.text = user.fullName.ifEmpty { "User" }
             tvUserEmail.text = user.email
+            
+            // Load profile image
+            ImageUtils.loadProfileImage(this, ivProfileImage, user.profileImageUrl)
             
             // Join Date
             val dateFormat = SimpleDateFormat("MMM yyyy", Locale.getDefault())
@@ -351,6 +394,168 @@ class ProfileActivity : AppCompatActivity() {
                     true
                 }
                 else -> false
+            }
+        }
+    }
+    
+    private fun showImageSelectionDialog() {
+        val options = arrayOf(
+            "Choose from Gallery",
+            "Remove Profile Picture"
+        )
+        
+        val availableOptions = if (currentUser?.profileImageUrl.isNullOrEmpty()) {
+            arrayOf("Choose from Gallery")
+        } else {
+            options
+        }
+        
+        AlertDialog.Builder(this)
+            .setTitle("Profile Picture")
+            .setItems(availableOptions) { _, which ->
+                when (availableOptions[which]) {
+                    "Choose from Gallery" -> checkPermissionAndOpenGallery()
+                    "Remove Profile Picture" -> removeProfilePicture()
+                }
+            }
+            .show()
+    }
+    
+    private fun showProfileImageDialog() {
+        val options = arrayOf(
+            "View Full Size",
+            "Change Picture",
+            "Remove Picture"
+        )
+        
+        AlertDialog.Builder(this)
+            .setTitle("Profile Picture")
+            .setItems(options) { _, which ->
+                when (which) {
+                    0 -> viewFullSizeImage()
+                    1 -> checkPermissionAndOpenGallery()
+                    2 -> removeProfilePicture()
+                }
+            }
+            .show()
+    }
+    
+    private fun checkPermissionAndOpenGallery() {
+        val permission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            Manifest.permission.READ_MEDIA_IMAGES
+        } else {
+            Manifest.permission.READ_EXTERNAL_STORAGE
+        }
+        
+        when {
+            ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED -> {
+                openImagePicker()
+            }
+            else -> {
+                permissionLauncher.launch(permission)
+            }
+        }
+    }
+    
+    private fun openImagePicker() {
+        try {
+            imagePickerLauncher.launch("image/*")
+        } catch (e: Exception) {
+            Toast.makeText(this, "Unable to open gallery", Toast.LENGTH_SHORT).show()
+        }
+    }
+    
+    private fun handleImageSelection(imageUri: Uri) {
+        lifecycleScope.launch {
+            try {
+                // Show loading
+                Toast.makeText(this@ProfileActivity, "Uploading image...", Toast.LENGTH_SHORT).show()
+                
+                // Validate image
+                if (!ImageUtils.isValidImageUri(this@ProfileActivity, imageUri)) {
+                    Toast.makeText(this@ProfileActivity, "Invalid image file", Toast.LENGTH_SHORT).show()
+                    return@launch
+                }
+                
+                // Compress image
+                val compressedImageData = ImageUtils.compressImage(this@ProfileActivity, imageUri)
+                if (compressedImageData == null) {
+                    Toast.makeText(this@ProfileActivity, "Failed to process image", Toast.LENGTH_SHORT).show()
+                    return@launch
+                }
+                
+                // Upload to Firebase
+                val imageUrl = userRepository.uploadProfileImage(compressedImageData)
+                
+                runOnUiThread {
+                    if (imageUrl != null) {
+                        // Update current user object
+                        currentUser = currentUser?.copy(profileImageUrl = imageUrl)
+                        
+                        // Load new image
+                        ImageUtils.loadProfileImage(this@ProfileActivity, ivProfileImage, imageUrl)
+                        
+                        Toast.makeText(this@ProfileActivity, "Profile picture updated!", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this@ProfileActivity, "Failed to upload image", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            } catch (e: Exception) {
+                runOnUiThread {
+                    Toast.makeText(this@ProfileActivity, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+    
+    private fun removeProfilePicture() {
+        AlertDialog.Builder(this)
+            .setTitle("Remove Profile Picture")
+            .setMessage("Are you sure you want to remove your profile picture?")
+            .setPositiveButton("Remove") { _, _ ->
+                lifecycleScope.launch {
+                    try {
+                        Toast.makeText(this@ProfileActivity, "Removing profile picture...", Toast.LENGTH_SHORT).show()
+                        
+                        val success = userRepository.deleteProfileImage()
+                        
+                        runOnUiThread {
+                            if (success) {
+                                // Update current user object
+                                currentUser = currentUser?.copy(profileImageUrl = "")
+                                
+                                // Load default image
+                                ImageUtils.loadProfileImage(this@ProfileActivity, ivProfileImage, "")
+                                
+                                Toast.makeText(this@ProfileActivity, "Profile picture removed", Toast.LENGTH_SHORT).show()
+                            } else {
+                                Toast.makeText(this@ProfileActivity, "Failed to remove profile picture", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    } catch (e: Exception) {
+                        runOnUiThread {
+                            Toast.makeText(this@ProfileActivity, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+    
+    private fun viewFullSizeImage() {
+        currentUser?.profileImageUrl?.let { imageUrl ->
+            if (imageUrl.isNotEmpty()) {
+                // Create a simple dialog to show full-size image
+                val imageView = ImageView(this)
+                imageView.scaleType = ImageView.ScaleType.FIT_CENTER
+                
+                ImageUtils.loadProfileImage(this, imageView, imageUrl)
+                
+                AlertDialog.Builder(this)
+                    .setView(imageView)
+                    .setPositiveButton("Close", null)
+                    .show()
             }
         }
     }

@@ -72,26 +72,58 @@
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
 
-                        <!-- Profile Image -->
-                        <com.google.android.material.card.MaterialCardView
+                        <!-- Profile Image Container -->
+                        <FrameLayout
                             android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            app:cardCornerRadius="40dp"
-                            app:cardElevation="4dp"
-                            app:strokeColor="@color/white"
-                            app:strokeWidth="3dp">
+                            android:layout_height="80dp">
 
-                            <ImageView
-                                android:id="@+id/ivProfileImage"
+                            <!-- Profile Image -->
+                            <com.google.android.material.card.MaterialCardView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@color/very_light_green"
-                                android:padding="16dp"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/ic_home"
-                                app:tint="@color/primary_green" />
+                                app:cardCornerRadius="40dp"
+                                app:cardElevation="4dp"
+                                app:strokeColor="@color/white"
+                                app:strokeWidth="3dp">
 
-                        </com.google.android.material.card.MaterialCardView>
+                                <ImageView
+                                    android:id="@+id/ivProfileImage"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/very_light_green"
+                                    android:padding="16dp"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/ic_person"
+                                    app:tint="@color/primary_green" />
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <!-- Camera Icon Overlay -->
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/cvCameraIcon"
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:layout_gravity="bottom|end"
+                                android:layout_marginEnd="2dp"
+                                android:layout_marginBottom="2dp"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:foreground="?attr/selectableItemBackgroundBorderless"
+                                app:cardBackgroundColor="@color/primary_green"
+                                app:cardCornerRadius="14dp"
+                                app:cardElevation="6dp"
+                                app:strokeWidth="0dp">
+
+                                <ImageView
+                                    android:layout_width="16dp"
+                                    android:layout_height="16dp"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/ic_camera"
+                                    app:tint="@color/white" />
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                        </FrameLayout>
 
                         <!-- User Info -->
                         <LinearLayout
@@ -253,7 +285,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
                         android:fontFamily="sans-serif-medium"
-                        android:text="📊 Your Activity"
+                        android:text="Your Activity"
                         android:textColor="@color/text_primary"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -388,7 +420,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:fontFamily="sans-serif-medium"
-                            android:text="🚜 Farm Information"
+                            android:text="Farm Information"
                             android:textColor="@color/text_primary"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -602,7 +634,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
                         android:fontFamily="sans-serif-medium"
-                        android:text="⚡ Quick Actions"
+                        android:text="Quick Actions"
                         android:textColor="@color/text_primary"
                         android:textSize="18sp"
                         android:textStyle="bold" />

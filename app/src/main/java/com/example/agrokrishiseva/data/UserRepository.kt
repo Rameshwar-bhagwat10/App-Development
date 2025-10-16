@@ -5,12 +5,14 @@ import com.example.agrokrishiseva.models.UserStats
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.tasks.await
 
 class UserRepository {
     
     private val auth = FirebaseAuth.getInstance()
     private val firestore = FirebaseFirestore.getInstance()
+    private val storage = FirebaseStorage.getInstance()
     private val usersCollection = firestore.collection("users")
     
     suspend fun getCurrentUser(): User? {
@@ -159,5 +161,45 @@ class UserRepository {
     
     fun signOut() {
         auth.signOut()
+    }
+    
+    suspend fun uploadProfileImage(imageData: ByteArray): String? {
+        return try {
+            val currentUser = auth.currentUser ?: return null
+            val imageRef = storage.reference
+                .child("profile_images")
+                .child("${currentUser.uid}.jpg")
+            
+            val uploadTask = imageRef.putBytes(imageData).await()
+            val downloadUrl = uploadTask.storage.downloadUrl.await()
+            
+            // Update user profile with new image URL
+            usersCollection.document(currentUser.uid)
+                .update("profileImageUrl", downloadUrl.toString()).await()
+            
+            downloadUrl.toString()
+        } catch (e: Exception) {
+            null
+        }
+    }
+    
+    suspend fun deleteProfileImage(): Boolean {
+        return try {
+            val currentUser = auth.currentUser ?: return false
+            val imageRef = storage.reference
+                .child("profile_images")
+                .child("${currentUser.uid}.jpg")
+            
+            // Delete from storage
+            imageRef.delete().await()
+            
+            // Update user profile to remove image URL
+            usersCollection.document(currentUser.uid)
+                .update("profileImageUrl", "").await()
+            
+            true
+        } catch (e: Exception) {
+            false
+        }
     }
 }
